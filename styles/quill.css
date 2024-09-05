@@ -1,0 +1,27 @@
+.ql-toolbar {
+  @apply w-full border-none outline-none bg-[#f9f9f9] text-black h-14;
+  border: none !important;
+  width: 100%;
+}
+
+.ql-container {
+  @apply border-none h-96;
+  border: none !important;
+}
+
+.ql-editor {
+  @apply text-black h-full;
+  border: none !important;
+  font-size: 24px;
+}
+
+.ql-toolbar .ql-formats button,
+.ql-toolbar .ql-formats .ql-picker {
+  @apply rounded;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.ql-toolbar .ql-formats button:hover,
+.ql-toolbar .ql-formats .ql-picker:hover {
+  @apply bg-[#3b49df] text-white;
+}
