@@ -18,8 +18,8 @@ export default function New() {
   return (
     <main className="w-full min-h-screen p-10">
       <section className="flex flex-row justify-between">
-        <div>
-          <img src="../public/dev-icon" alt="" />
+        <div className="flex flex-row">
+          <img className="h-10" src="./dev-icon.png" alt="" />
           <h3>Create Post</h3>
         </div>
         <div className="flex gap-4">

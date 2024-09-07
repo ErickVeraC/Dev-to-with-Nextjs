@@ -1,10 +1,10 @@
 import PrintAllPosts from "@/components/PrintAllPosts";
+import MainLayout from "@/layouts/MainLayout";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
+    <MainLayout>
       <PrintAllPosts />
-    </div>
+    </MainLayout>
   );
 }
