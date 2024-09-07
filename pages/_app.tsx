@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/quill.css";
-import { Fanwood_Text } from "next/font/google";
+import "@/utils/fontawesome";
 
 import type { AppProps } from "next/app";
 
