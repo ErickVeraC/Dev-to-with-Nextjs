@@ -37,9 +37,19 @@ export async function login(email: string, password: string) {
   const data = await response.json();
   console.log("Received data:", data);
 
-  if (data.success && data.data && data.data.token) {
-    return data.data.token;
+  if (data.success && data.data && data.data.token && data.data.userId) {
+    return { token: data.data.token, userId: data.data.userId };
   } else {
     throw new Error("Invalid response structure");
   }
+}
+
+export async function getUserData(userId: string) {
+  const response = await fetch(`${API_URL}/user/${userId}`);
+  if (!response.ok) {
+    throw new Error(`Error fetching user data: ${response.statusText}`);
+  }
+  const result = await response.json();
+  console.log("User data fetched:", result);
+  return result.data.user;
 }

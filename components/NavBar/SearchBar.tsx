@@ -20,7 +20,7 @@ export default function SearchBar({
         value={query}
         onChange={handleInputChange}
         placeholder="Search posts..."
-        className="p-2 border rounded"
+        className="p-2 border rounded-md"
       />
     </div>
   );

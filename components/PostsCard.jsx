@@ -1,14 +1,16 @@
-export default function PostsCard({ post }) {
+export default function PostsCard({ post, showImage }) {
   return (
     <article
       id={`post-${post.id}`}
-      className="border border-black rounded-xl cursor-pointer overflow-hidden"
+      className="border border-gray-200 rounded-xl cursor-pointer overflow-hidden"
     >
-      <img
-        src={post.image}
-        alt={post.title}
-        className="w-full h-auto mb-4 m-0"
-      />
+      {showImage && (
+        <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-auto mb-4 m-0"
+        />
+      )}
       <div className="p-8">
         <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
         <div className="flex gap-2 text-gray-400 mb-2">

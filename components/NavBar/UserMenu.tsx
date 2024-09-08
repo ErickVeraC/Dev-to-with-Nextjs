@@ -1,17 +1,32 @@
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
-export default function UserMenu() {
+export default function UserMenu({
+  userData,
+}: {
+  userData: { name: string; profilePic: string } | null;
+}) {
   return (
     <div className="user-menu flex items-center gap-4">
-      <Link href="/new">Create Post</Link>
+      <Link
+        className="text-[#3b49df] text-sm py-2 px-4 border border-[#3b49df] rounded-md hover:bg-[#3b49df] hover:text-white"
+        href="/new"
+      >
+        Create Post
+      </Link>
       <button className="p-2">
-        <img
-          src="/icons/bell-icon.png"
-          alt="Notifications"
-          className="h-6 w-6"
-        />
+        <FontAwesomeIcon icon={faBell} className="size-6" />
       </button>
-      <img src="" alt="" className="h-8 w-8 rounded-full" />
+      {userData && (
+        <>
+          <img
+            src={userData.profilePic}
+            alt={userData.name}
+            className="h-8 w-8 rounded-full object-cover"
+          />
+        </>
+      )}
     </div>
   );
 }

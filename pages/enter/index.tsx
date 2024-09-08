@@ -19,16 +19,17 @@ export default function Enter() {
     console.log("Form submitted with data:", data);
     try {
       setIsSubmitting(true);
-      const token = await login(data.email, data.password);
+      const { token, userId } = await login(data.email, data.password);
 
-      if (token) {
+      if (token && userId) {
         localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
         router.push("/");
         setIsSubmitting(false);
         return;
       }
 
-      console.log("Received token:", token);
+      console.log("Received token and userId:", token, userId);
 
       toast.error("Invalid data");
       setError("root.data", {
