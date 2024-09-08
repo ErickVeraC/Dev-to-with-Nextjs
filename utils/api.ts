@@ -14,3 +14,32 @@ export async function getPosts(): Promise<Post[]> {
   const data: Post[] = await response.json();
   return data;
 }
+
+export async function login(email: string, password: string) {
+  console.log("Sending login request with:", { email, password });
+
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  console.log("Received response:", response);
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Error response data:", errorData);
+    throw new Error(errorData.message || "Network response didn't return OK");
+  }
+
+  const data = await response.json();
+  console.log("Received data:", data);
+
+  if (data.success && data.data && data.data.token) {
+    return data.data.token;
+  } else {
+    throw new Error("Invalid response structure");
+  }
+}
