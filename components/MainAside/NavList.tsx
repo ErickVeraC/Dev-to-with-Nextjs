@@ -1,60 +1,117 @@
-import NavItem from "./NavItem";
-import {
-  faHome,
-  faBook,
-  faPodcast,
-  faVideo,
-  faTags,
-  faQuestionCircle,
-  faShoppingCart,
-  faHeart,
-  faTrophy,
-  faStar,
-  faEnvelope,
-  faBookOpen,
-  faBalanceScale,
-  faThumbsUp,
-  faShieldAlt,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
-
-const navItems = [
-  { href: "#", icon: faHome, label: "Home" },
-  { href: "#", icon: faBook, label: "Reading List" },
-  { href: "#", icon: faPodcast, label: "Podcast" },
-  { href: "#", icon: faVideo, label: "Videos" },
-  { href: "#", icon: faTags, label: "Tags" },
-  { href: "#", icon: faQuestionCircle, label: "DEV Help" },
-  { href: "#", icon: faShoppingCart, label: "Forem Shop" },
-  { href: "#", icon: faHeart, label: "Advertise on DEV" },
-  { href: "#", icon: faTrophy, label: "DEV Challenges" },
-  { href: "#", icon: faStar, label: "DEV Showcase" },
-  {
-    href: "#",
-    icon: <img src="/dev-icon.png" alt="Icono de DEV" width="30px" />,
-    label: "About",
-  },
-  { href: "#", icon: faEnvelope, label: "Contact" },
-  { href: "#", icon: faBookOpen, label: "Guides" },
-  { href: "#", icon: faBalanceScale, label: "Software comparisons" },
-  { href: "#", icon: faThumbsUp, label: "Code of Conduct" },
-  { href: "#", icon: faShieldAlt, label: "Privacy Policy" },
-  { href: "#", icon: faEye, label: "Terms of use" },
-];
-
-const NavList: React.FC = () => {
+const NavList: React.FC = ({ items }) => {
   return (
     <section name="list-bar">
       <ul className="flex flex-col mb-3">
-        {navItems.map((item, index) => (
-          <NavItem
-            key={index}
-            href={item.href}
-            icon={item.icon}
-            label={item.label}
-          />
-        ))}
-        <p className="text-uppercase font-bold">Other</p>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs ">&#127968;</span>
+            Home
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#128229;</span>
+            Reading List
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#127897;</span>
+            Podcast
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#127909;</span>
+            Videos
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center p-2 gap-2">
+            <span className="p-2 text-xs">&#127991;</span>
+            Tags
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center p-2 gap-2">
+            <span className="p-2 text-xs">&#128161;</span>
+            DEV Help
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center p-2 gap-2">
+            <span className="p-2 text-xs">&#128717;</span>
+            Forem Shop
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#10084;</span>
+            Advertise on DEV
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#127942;</span>
+            DEV Challenges
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#10024;</span>
+            DEV Showcase
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">
+              <img
+                src="/dev-icon.png"
+                id="icondev"
+                alt="Icono de DEV"
+                width="30px"
+              />
+            </span>
+            About
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#128239;</span>
+            Contact
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#128214;</span>
+            Guides
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#129300;</span>
+            Software comparisons
+          </button>
+        </li>
+        <p>Other</p>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#128077;</span>
+            Code of Conduct
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2">
+            <span className="p-2 text-xs">&#129299;</span>
+            Privacy Policy
+          </button>
+        </li>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+          <button href="#" className="flex items-center px-2 gap-2 ">
+            <span className="p-2 text-xs">&#128064;</span>
+            Terms of use
+          </button>
+        </li>
       </ul>
     </section>
   );

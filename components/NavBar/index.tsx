@@ -37,7 +37,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="w-full flex justify-between items-center p-2 bg-gray-100">
+    <nav className="w-full flex justify-between items-center p-2 bg-white">
       <Logo />
       <SearchBar onSearch={handleSearch} />
       {token ? <UserMenu userData={userData} /> : <AuthButtons />}

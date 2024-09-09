@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPosts } from "@/utils/api";
 import SortPosts from "./SortPosts";
+import PostsCard from "./PostsCard";
 
 export default function PrintAllPosts() {
   const [posts, setPosts] = useState([]);
