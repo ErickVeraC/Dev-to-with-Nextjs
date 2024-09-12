@@ -53,3 +53,26 @@ export async function getUserData(userId: string) {
   console.log("User data fetched:", result);
   return result.data.user;
 }
+
+export async function createUser(
+  email: string,
+  password: string,
+  name: string,
+  profilePic: string
+) {
+  const response = await fetch(`${API_URL}/user`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, name, profilePic }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Network response was not ok");
+  }
+
+  const data = await response.json();
+  return data;
+}

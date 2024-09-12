@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
@@ -7,8 +8,29 @@ export default function UserMenu({
 }: {
   userData: { name: string; profilePic: string } | null;
 }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/enter";
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="user-menu flex items-center gap-4">
+    <div className="relative user-menu flex items-center gap-4">
       <Link
         className="text-[#3b49df] text-sm py-2 px-4 border border-[#3b49df] rounded-md hover:bg-[#3b49df] hover:text-white"
         href="/new"
@@ -23,8 +45,28 @@ export default function UserMenu({
           <img
             src={userData.profilePic}
             alt={userData.name}
-            className="h-8 w-8 rounded-full object-cover"
+            className="h-8 w-8 rounded-full object-cover cursor-pointer hover:border hover:border-[#c0c0ee]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
+          {isMenuOpen && (
+            <div
+              ref={menuRef}
+              className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg p-2"
+              style={{ top: "calc(100% + 0.5rem)" }} // Ajusta la posición para que no cubra la imagen
+            >
+              <div className="p-2">
+                <p className="text-sm text-gray-700 border-b border-black pb-2">
+                  {userData.name}
+                </p>
+                <button
+                  className="w-full text-left bg-transparent px-4 py-2 text-sm rounded-md text-black cursor-pointer hover:bg-[#eeeefc] hover:text-[#3b49df] hover:underline"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>
