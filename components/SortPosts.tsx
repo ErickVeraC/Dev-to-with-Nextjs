@@ -27,7 +27,7 @@ export default function SortPosts({ posts }) {
 
   return (
     <div>
-      <div className="flex flex-row gap-4 mb-4">
+      <div className="flex flex-row gap-4 mb-2">
         <button
           onClick={() => sortPosts("recent")}
           className={clsx(
@@ -55,7 +55,7 @@ export default function SortPosts({ posts }) {
       </div>
       <section>
         {sortedPosts.map((post, idx) => (
-          <div key={`post-${idx}`} className="pb-8">
+          <div key={`post-${idx}`} className="pb-4">
             <PostsCard key={post._id} post={post} showImage={idx === 0} />
           </div>
         ))}
