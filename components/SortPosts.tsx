@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
-import PostsCard from "./PostsCard";
+import PostsCard from "@/components/PostsCard";
 
 export default function SortPosts({ posts }) {
   const [sortedPosts, setSortedPosts] = useState(posts);

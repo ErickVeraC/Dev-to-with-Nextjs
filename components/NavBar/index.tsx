@@ -5,7 +5,7 @@ import UserMenu from "@/components/NavBar/UserMenu";
 import AuthButtons from "@/components/NavBar/AuthButtons";
 import Logo from "@/components/NavBar/Logo";
 
-function NavBar() {
+function NavBar({ onSearch }) {
   const [token, setToken] = useState<string | null>(null);
   const [userData, setUserData] = useState<{
     name: string;
@@ -32,14 +32,10 @@ function NavBar() {
     }
   }, []);
 
-  const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
-  };
-
   return (
     <nav className="w-full flex justify-between items-center p-2 bg-white">
       <Logo />
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={onSearch} /> {/* Pasa onSearch a SearchBar */}
       {token ? <UserMenu userData={userData} /> : <AuthButtons />}
     </nav>
   );

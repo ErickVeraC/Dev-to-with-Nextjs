@@ -1,10 +1,12 @@
 import NavBar from "@/components/NavBar";
 
-export default function MainLayout({ children }) {
+function MainLayout({ children, onSearch }) {
   return (
     <main className="">
-      <NavBar />
+      <NavBar onSearch={onSearch} />
       {children}
     </main>
   );
 }
+
+export default MainLayout;
