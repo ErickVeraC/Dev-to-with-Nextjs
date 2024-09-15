@@ -5,12 +5,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import Link from "next/link";
+import Select from "react-select";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
+const tagOptions = [
+  { value: "tag1", label: "Tag 1" },
+  { value: "tag2", label: "Tag 2" },
+  { value: "tag3", label: "Tag 3" },
+  { value: "tag4", label: "Tag 4" },
+  { value: "tag5", label: "Tag 5" },
+  { value: "tag6", label: "Tag 6" },
+  { value: "tag7", label: "Tag 7" },
+  { value: "tag8", label: "Tag 8" },
+  { value: "tag9", label: "Tag 9" },
+  { value: "tag10", label: "Tag 10" },
+];
 
 export default function New() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const handleButtonClick = () => {
     setIsInputVisible(true);
@@ -18,6 +33,10 @@ export default function New() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setImageUrl(event.target.value);
+  };
+
+  const handleTagChange = (selected: any) => {
+    setSelectedTags(selected);
   };
 
   const {
@@ -74,11 +93,19 @@ export default function New() {
             placeholder="New post title here..."
             className="p-4 font-bold text-5xl border-none focus:outline-none placeholder:font-bold placeholder:text-5xl placeholder:text-[#525252]"
           />
-          <input
-            type="text"
-            placeholder="Add up to 4 tags..."
-            className="p-4 text-sm border-none focus:outline-none"
-          />
+          <div>
+            <Select
+              isMulti
+              name="tags"
+              options={tagOptions}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              placeholder="Add up to 4 tags..."
+              value={selectedTags}
+              onChange={handleTagChange}
+              isOptionDisabled={() => selectedTags.length >= 4}
+            />
+          </div>
         </div>
         <ReactQuill
           placeholder="Write your post content here..."
