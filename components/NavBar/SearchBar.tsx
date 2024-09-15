@@ -19,8 +19,8 @@ export default function SearchBar({
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Search posts..."
-        className="p-2 border rounded-md"
+        placeholder="Search..."
+        className="p-2 w-full border rounded-md"
       />
     </div>
   );

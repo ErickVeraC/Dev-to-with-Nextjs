@@ -33,10 +33,16 @@ function NavBar({ onSearch }) {
   }, []);
 
   return (
-    <nav className="w-full flex justify-between items-center p-2 bg-white">
-      <Logo />
-      <SearchBar onSearch={onSearch} /> {/* Pasa onSearch a SearchBar */}
-      {token ? <UserMenu userData={userData} /> : <AuthButtons />}
+    <nav className="w-full grid grid-cols-12 gap-4 p-2 bg-white">
+      <div className="col-1">
+        <Logo />
+      </div>
+      <div className="col-span-8">
+        <SearchBar onSearch={onSearch} />
+      </div>
+      <div className="col-span-3">
+        {token ? <UserMenu userData={userData} /> : <AuthButtons />}
+      </div>
     </nav>
   );
 }
