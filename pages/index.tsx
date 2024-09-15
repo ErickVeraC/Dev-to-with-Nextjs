@@ -2,7 +2,8 @@ import { useState } from "react";
 import MainLayout from "@/layouts/MainLayout";
 import MainAside from "@/components/MainAside";
 import PrintAllPosts from "@/components/PrintAllPosts";
-import { getPosts } from "@/utils/api"; // Importa la función getPosts
+import DiscussAside from "@/components/discussAside";
+import { getPosts } from "@/utils/api";
 
 export default function Home({ posts }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +15,6 @@ export default function Home({ posts }) {
   return (
     <MainLayout onSearch={handleSearch}>
       {" "}
-      {/* Pasa handleSearch a MainLayout */}
       <main className="grid grid-cols-12 gap-4">
         <aside className="col-span-3 hidden md:block">
           <MainAside />
@@ -22,7 +22,9 @@ export default function Home({ posts }) {
         <section className="col-span-6">
           <PrintAllPosts searchQuery={searchQuery} posts={posts} />
         </section>
-        <div className="col-span-3"></div>
+        <div className="col-span-3">
+          <DiscussAside />
+        </div>
       </main>
     </MainLayout>
   );

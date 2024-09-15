@@ -8,11 +8,11 @@ export default function PrintAllPosts({ searchQuery }) {
 
   useEffect(() => {
     getPosts()
-      .then((response) => {
-        if (response.success && Array.isArray(response.data.posts)) {
-          setPosts(response.data.posts);
+      .then((posts) => {
+        if (Array.isArray(posts)) {
+          setPosts(posts);
         } else {
-          console.error("Expected an array but got:", response);
+          console.error("Expected an array but got:", posts);
         }
       })
       .catch((error) => console.error("[get error to receive posts]", error));

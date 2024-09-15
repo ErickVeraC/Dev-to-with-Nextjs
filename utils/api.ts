@@ -6,13 +6,70 @@ interface Post {
   content: string;
 }
 
+interface Tag {
+  name: string;
+  count: number;
+  createdAt: string;
+}
+
 export async function getPosts(): Promise<Post[]> {
   const response = await fetch(`${API_URL}/post`);
   if (!response.ok) {
     throw new Error(`Error fetching posts: ${response.statusText}`);
   }
-  const data: Post[] = await response.json();
-  return data;
+  const data = await response.json();
+  if (data.success && Array.isArray(data.data.posts)) {
+    return data.data.posts;
+  } else {
+    throw new Error("Unexpected response structure");
+  }
+}
+
+export async function getPopularTags(): Promise<Tag[]> {
+  const posts = await getPosts();
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected posts to be an array");
+  }
+  const tagCount: { [key: string]: number } = {};
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+  });
+
+  const tags = Object.keys(tagCount)
+    .map((tag) => ({
+      name: tag,
+      count: tagCount[tag],
+      createdAt: new Date().toISOString(),
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5);
+
+  return tags;
+}
+
+export async function getRecentTags(): Promise<Tag[]> {
+  const posts = await getPosts();
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected posts to be an array");
+  }
+  const tagSet = new Set<string>();
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      tagSet.add(tag);
+    });
+  });
+
+  const tags = Array.from(tagSet).map((tag) => ({
+    name: tag,
+    count: 1,
+    createdAt: new Date().toISOString(),
+  }));
+
+  return tags.slice(0, 5);
 }
 
 export async function login(email: string, password: string) {
