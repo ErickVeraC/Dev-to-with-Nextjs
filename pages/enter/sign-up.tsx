@@ -5,12 +5,14 @@ import clsx from "clsx";
 import { createUser } from "@/utils/api";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function SignUp() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(createAccountSchema),
   });
@@ -22,9 +24,16 @@ export default function SignUp() {
     setIsSubmitting(true);
     try {
       const { email, password, name, profilePic } = data;
-      await createUser(email, password, name, profilePic[0]);
-      router.push("/enter");
+
+      await createUser(email, password, name, profilePic);
+      toast.success(
+        "The new user was created successfully, now you need to log in"
+      );
+
+      reset();
+      router.push("/");
     } catch (error) {
+      toast.error(error.message || "Failed to create user");
       console.error("Error creating user:", error);
     } finally {
       setIsSubmitting(false);
@@ -32,20 +41,24 @@ export default function SignUp() {
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen">
+    <main className="flex items-center justify-center min-h-screen bg-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-3/5 flex flex-col justify-center p-2"
+        className="w-3/5 flex flex-col justify-center p-2 border border-[#f5f5f5] rounded-md"
       >
-        <h1>Create your account</h1>
+        <h1 className="pt-4 pb-10 font-bold">Create your account</h1>
         <div className="flex flex-col mb-4">
-          <label htmlFor="profilePic">Profile image</label>
+          <label htmlFor="profilePic">
+            Profile image <span className="text-red-500">*</span>
+          </label>
           <input
-            type="file"
-            id="profilePic"
+            type="text"
+            id="profilePicLink"
             {...register("profilePic")}
-            className={clsx("border p-2", {
+            className={clsx("border p-2 rounded-md", {
               "border-red-500": errors.profilePic,
+              "border-[#f4f4f4]": !errors.profilePic,
+              "hover:border-[#a6a6a6]": !errors.profilePic,
             })}
           />
           {errors.profilePic && (
@@ -58,8 +71,10 @@ export default function SignUp() {
             type="text"
             id="name"
             {...register("name")}
-            className={clsx("border p-2", {
+            className={clsx("border p-2 rounded-md", {
               "border-red-500": errors.name,
+              "border-[#f4f4f4]": !errors.name,
+              "hover:border-[#a6a6a6]": !errors.name,
             })}
           />
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
@@ -70,8 +85,10 @@ export default function SignUp() {
             type="email"
             id="email"
             {...register("email")}
-            className={clsx("border p-2", {
+            className={clsx("border p-2 rounded-md", {
               "border-red-500": errors.email,
+              "border-[#f4f4f4]": !errors.email,
+              "hover:border-[#a6a6a6]": !errors.email,
             })}
           />
           {errors.email && (
@@ -84,8 +101,10 @@ export default function SignUp() {
             type="password"
             id="password"
             {...register("password")}
-            className={clsx("border p-2", {
+            className={clsx("border p-2 rounded-md", {
               "border-red-500": errors.password,
+              "border-[#f4f4f4]": !errors.password,
+              "hover:border-[#a6a6a6]": !errors.password,
             })}
           />
           {errors.password && (
@@ -98,8 +117,10 @@ export default function SignUp() {
             type="password"
             id="passwordConfirmation"
             {...register("passwordConfirmation")}
-            className={clsx("border p-2", {
+            className={clsx("border p-2 rounded-md", {
               "border-red-500": errors.passwordConfirmation,
+              "border-[#f4f4f4]": !errors.passwordConfirmation,
+              "hover:border-[#a6a6a6]": !errors.passwordConfirmation,
             })}
           />
           {errors.passwordConfirmation && (
@@ -110,10 +131,10 @@ export default function SignUp() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded"
+          className="bg-[#3b49df] text-white text-sm py-2 px-4 rounded-md hover:bg-[#2f3ab1] self-start"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Creating account..." : "Create account"}
+          {isSubmitting ? "Creating..." : "Sign up"}
         </button>
       </form>
     </main>
