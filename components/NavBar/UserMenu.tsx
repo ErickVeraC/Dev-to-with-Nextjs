@@ -30,14 +30,14 @@ export default function UserMenu({
   }, []);
 
   return (
-    <div className="relative user-menu flex items-center gap-4">
+    <div className="relative user-menu grid grid-cols-6 gap-4 items-center">
       <Link
-        className="text-[#3b49df] text-sm py-2 px-4 border border-[#3b49df] rounded-md hover:bg-[#3b49df] hover:text-white"
+        className="col-span-3 text-center text-[#3b49df] text-sm py-2 px-2 border border-[#3b49df] rounded-md hover:bg-[#3b49df] hover:text-white"
         href="/new"
       >
         Create Post
       </Link>
-      <button className="p-2">
+      <button className="col-span-1 p-2">
         <FontAwesomeIcon icon={faBell} className="size-6" />
       </button>
       {userData && (
@@ -45,14 +45,14 @@ export default function UserMenu({
           <img
             src={userData.profilePic}
             alt={userData.name}
-            className="h-8 w-8 rounded-full object-cover cursor-pointer hover:border hover:border-[#c0c0ee]"
+            className="col-span-2 size-8 rounded-full object-cover cursor-pointer hover:border hover:border-[#c0c0ee]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
           {isMenuOpen && (
             <div
               ref={menuRef}
               className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg p-2"
-              style={{ top: "calc(100% + 0.5rem)" }} // Ajusta la posición para que no cubra la imagen
+              style={{ top: "calc(100% + 0.5rem)" }}
             >
               <div className="p-2">
                 <p className="text-sm text-gray-700 border-b border-black pb-2">

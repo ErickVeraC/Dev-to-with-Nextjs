@@ -16,7 +16,7 @@ export default function Home({ posts }) {
       {" "}
       {/* Pasa handleSearch a MainLayout */}
       <main className="grid grid-cols-12 gap-4">
-        <aside className="col-span-3">
+        <aside className="col-span-3 hidden md:block">
           <MainAside />
         </aside>
         <section className="col-span-6">
