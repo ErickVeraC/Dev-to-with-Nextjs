@@ -155,3 +155,46 @@ export async function getPostById(id: string) {
     throw error;
   }
 }
+
+interface PostData {
+  title: string;
+  content: string;
+  tags?: string[];
+  image?: string;
+  user: string;
+}
+
+interface CreatePostResponse {
+  success: boolean;
+  data: PostData;
+  message?: string;
+}
+
+export async function createPost(
+  postData: PostData,
+  token: string
+): Promise<CreatePostResponse> {
+  try {
+    const response = await fetch(`${API_URL}/post`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postData),
+    });
+
+    if (!response.ok) {
+      const errorDetails = await response.text();
+      throw new Error(
+        `Network response was not ok: ${response.statusText} - ${errorDetails}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
+  }
+}

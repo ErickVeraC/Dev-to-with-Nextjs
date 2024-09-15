@@ -1,25 +1,40 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import schema from "@/schemas/schema";
+import { publishSchema } from "@/schemas/publishSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import Link from "next/link";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function New() {
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleButtonClick = () => {
+    setIsInputVisible(true);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setImageUrl(event.target.value);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(publishSchema),
   });
 
   return (
     <main className="w-full min-h-screen p-10">
       <section className="flex flex-row justify-between">
         <div className="flex flex-row">
-          <img className="h-10" src="./dev-icon.png" alt="" />
+          <Link href={"/"}>
+            <img className="h-10" src="/dev-icon.png" alt="" />
+          </Link>
           <h3>Create Post</h3>
         </div>
         <div className="flex gap-4">
@@ -37,9 +52,22 @@ export default function New() {
       >
         <div className="p-4">
           <div className="w-1/3 p-[2.2px] rounded-md transition-all duration-100 ease-in-out hover:border-2 hover:border-[#3b49df]">
-            <button className="p-2 rounded-md border border-gray-500/8 font-medium w-full justify-start text-sm ">
-              Add cover image
-            </button>
+            {isInputVisible ? (
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={handleInputChange}
+                className="p-2 rounded-md border border-gray-500/8 font-medium w-full justify-start text-sm"
+                placeholder="Enter image URL"
+              />
+            ) : (
+              <button
+                onClick={handleButtonClick}
+                className="p-2 rounded-md border border-gray-500/8 font-medium w-full justify-start text-sm"
+              >
+                Add cover image
+              </button>
+            )}
           </div>
           <input
             type="text"
