@@ -6,26 +6,30 @@ import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import Link from "next/link";
 import Select from "react-select";
+import { createPost } from "@/utils/api";
+import clsx from "clsx";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const tagOptions = [
-  { value: "tag1", label: "Tag 1" },
-  { value: "tag2", label: "Tag 2" },
-  { value: "tag3", label: "Tag 3" },
-  { value: "tag4", label: "Tag 4" },
-  { value: "tag5", label: "Tag 5" },
-  { value: "tag6", label: "Tag 6" },
-  { value: "tag7", label: "Tag 7" },
-  { value: "tag8", label: "Tag 8" },
-  { value: "tag9", label: "Tag 9" },
-  { value: "tag10", label: "Tag 10" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "Python", label: "Python" },
+  { value: "Java", label: "Java" },
+  { value: "CSharp", label: "C#" },
+  { value: "Ruby", label: "Ruby" },
+  { value: "PHP", label: "PHP" },
+  { value: "CPlusPlus", label: "C++" },
+  { value: "TypeScript", label: "TypeScript" },
+  { value: "Swift", label: "Swift" },
+  { value: "Go", label: "Go" },
 ];
 
 export default function New() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
+  const [contentBody, setContentBody] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleButtonClick = () => {
     setIsInputVisible(true);
@@ -39,13 +43,52 @@ export default function New() {
     setSelectedTags(selected);
   };
 
+  const handleContentChange = (value: string) => {
+    setContentBody(value);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(publishSchema),
   });
+
+  const onSubmit = async (data: any) => {
+    setIsSubmitting(true);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token not found in local storage");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const postData = {
+      title: data.title,
+      body: contentBody,
+      tags: selectedTags.map((tag: any) => tag.value),
+      image: imageUrl,
+      user: localStorage.getItem("userId"),
+    };
+
+    console.log("Token:", token);
+    console.log("Post Data:", postData);
+
+    try {
+      await createPost(postData, token);
+      console.log("Post created successfully");
+      reset();
+      setSelectedTags([]);
+      setContentBody("");
+      setImageUrl("");
+    } catch (error) {
+      console.error("Error creating post:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main className="w-full min-h-screen p-10">
@@ -66,7 +109,7 @@ export default function New() {
       </section>
 
       <form
-        action=""
+        onSubmit={handleSubmit(onSubmit)}
         className="h-[85%] flex flex-col w-8/12 bg-white rounded-md mt-4 mb-6"
       >
         <div className="p-4">
@@ -91,9 +134,11 @@ export default function New() {
           <input
             type="text"
             placeholder="New post title here..."
+            {...register("title")}
             className="p-4 font-bold text-5xl border-none focus:outline-none placeholder:font-bold placeholder:text-5xl placeholder:text-[#525252]"
           />
           <div>
+            {errors.title && <p>{errors.title.message}</p>}
             <Select
               isMulti
               name="tags"
@@ -108,22 +153,33 @@ export default function New() {
           </div>
         </div>
         <ReactQuill
+          value={contentBody}
+          onChange={handleContentChange}
           placeholder="Write your post content here..."
           className="h-96 p-4 text-2xl border-none focus:outline-none"
         />
+        <div className="flex flex-row gap-6 p-4">
+          <button
+            type="submit"
+            className={clsx(
+              "text-sm py-2 px-8 rounded-md transition ease duration-300",
+              {
+                "bg-[#3b49df] text-white hover:bg-[#313cba]": !isSubmitting,
+                "bg-gray-400 text-gray-700 cursor-not-allowed": isSubmitting,
+              }
+            )}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Publishing..." : "Publish"}
+          </button>
+          <button className="py-2 px-4 text-sm font-light hover:bg-[#3b49df]/5 hover:text-[#313cba] hover:rounded-md hover:py-2 hover:px-4 transition-all duration-300 ease">
+            Save draft
+          </button>
+          <button className="py-2 px-4 text-sm font-light hover:bg-[#3b49df]/5 hover:text-[#313cba] hover:rounded-md hover:py-2 hover:px-4 transition-all duration-300 ease">
+            Revert new changes
+          </button>
+        </div>
       </form>
-
-      <div className="flex flex-row gap-6">
-        <button className="text-sm py-2 px-8 bg-[#3b49df] text-white rounded-md hover:bg-[#313cba] transition ease duration-300">
-          Publish
-        </button>
-        <button className="py-2 px-4 text-sm font-light hover:bg-[#3b49df]/5 hover:text-[#313cba] hover:rounded-md hover:py-2 hover:px-4 transition-all duration-300 ease">
-          Save draft
-        </button>
-        <button className="py-2 px-4 text-sm font-light hover:bg-[#3b49df]/5 hover:text-[#313cba] hover:rounded-md hover:py-2 hover:px-4 transition-all duration-300 ease">
-          Revert new changes
-        </button>
-      </div>
     </main>
   );
 }
