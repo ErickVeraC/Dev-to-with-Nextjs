@@ -133,3 +133,25 @@ export async function createUser(
   const data = await response.json();
   return data;
 }
+
+export async function getPostById(id: string) {
+  try {
+    console.log(`Fetching post with id: ${id}`);
+    const response = await fetch(`${API_URL}/post/${id}`);
+    if (!response.ok) {
+      console.error(`Error fetching post: ${response.statusText}`);
+      throw new Error(`Error fetching post: ${response.statusText}`);
+    }
+    const data = await response.json();
+    console.log("Data received from API:", data);
+    if (data.success) {
+      return data.data;
+    } else {
+      console.error("Unexpected response structure:", data);
+      throw new Error("Unexpected response structure");
+    }
+  } catch (error) {
+    console.error("Error in getPostById:", error);
+    throw error;
+  }
+}

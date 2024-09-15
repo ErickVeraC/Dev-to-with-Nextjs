@@ -56,7 +56,7 @@ export default function SortPosts({ posts }) {
       <section>
         {sortedPosts.map((post, idx) => (
           <div key={`post-${idx}`} className="pb-8">
-            <PostsCard post={post} showImage={idx === 0} />
+            <PostsCard key={post._id} post={post} showImage={idx === 0} />
           </div>
         ))}
       </section>
