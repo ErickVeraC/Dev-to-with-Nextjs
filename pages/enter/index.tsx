@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { socialSessionButtons } from "@/components/Icons";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -16,11 +16,11 @@ export default function Enter() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm();
+  } = useForm<FormData>();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function onSubmit(data: FormData) {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Form submitted with data:", data);
     try {
       setIsSubmitting(true);
@@ -45,7 +45,7 @@ export default function Enter() {
       console.error("Error: ", error);
       setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <main className="bg-white w-full max-h-full mx-auto max-w-3xl">

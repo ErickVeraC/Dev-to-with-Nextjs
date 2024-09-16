@@ -6,7 +6,7 @@ export default function PostDetail({ post }) {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    console.log("Post data:", post); // Agrega este log para verificar la estructura del objeto `post`
+    console.log("Post data:", post);
     if (post.user) {
       getUserData(post.user).then(setUserData).catch(console.error);
     } else {

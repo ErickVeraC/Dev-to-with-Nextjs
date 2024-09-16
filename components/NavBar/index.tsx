@@ -6,7 +6,11 @@ import AuthButtons from "@/components/NavBar/AuthButtons";
 import Logo from "@/components/NavBar/Logo";
 import NavList from "@/components/MainAside/NavList";
 
-function NavBar({ onSearch }) {
+interface NavBarProps {
+  onSearch: (query: string) => void;
+}
+
+function NavBar({ onSearch }: NavBarProps) {
   const [token, setToken] = useState<string | null>(null);
   const [userData, setUserData] = useState<{
     name: string;

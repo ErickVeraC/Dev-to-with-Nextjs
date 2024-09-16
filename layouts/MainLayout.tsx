@@ -1,6 +1,12 @@
+import React from "react";
 import NavBar from "@/components/NavBar";
 
-function MainLayout({ children, onSearch }) {
+interface MainLayoutProps {
+  children: React.ReactNode;
+  onSearch: (query: string) => void;
+}
+
+function MainLayout({ children, onSearch }: MainLayoutProps) {
   return (
     <main className="">
       <NavBar onSearch={onSearch} />

@@ -5,37 +5,33 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import CreatePostMenu from "@/components/CreatePostMenu";
 
-type FormData = {
-  title: string;
-  content: string;
-  tags: string[];
-};
-
 export default function NewPost() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-  const [tagsArray, setTagsArray] = useState<string[]>([]);
+  const [tagsArray, setTagsArray] = useState([]);
   const [tagPlaceholder, setTagPlaceholder] = useState("Add up to 4 tags...");
   const [message, setMessage] = useState("");
 
   const [isInputVisible, setIsInputVisible] = useState(false);
   const router = useRouter();
 
-  const handleTagInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleTagInput = (event) => {
     if (tagsArray.length >= 4) {
       event.preventDefault();
       return;
     }
 
-    if (event.key === " " && event.target.value.trim()) {
-      const newTag = event.target.value.trim();
+    const target = event.target;
+
+    if (event.key === " " && target.value.trim()) {
+      const newTag = target.value.trim();
       if (!tagsArray.includes(newTag)) {
         setTagsArray([...tagsArray, newTag]);
       }
-      event.target.value = "";
+      target.value = "";
       event.preventDefault();
     }
 
@@ -45,7 +41,7 @@ export default function NewPost() {
     );
   };
 
-  const handleRemoveTag = (index: number) => {
+  const handleRemoveTag = (index) => {
     const updatedTags = tagsArray.filter((_, i) => i !== index);
     setTagsArray(updatedTags);
     const remainingTags = 4 - updatedTags.length;
@@ -56,10 +52,16 @@ export default function NewPost() {
     );
   };
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit = async (data) => {
     console.log("Publishing started...");
     try {
-      const result = await createPost(data, token);
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      const postData = { ...data, tags: tagsArray };
+      const result = await createPost(postData, token);
       console.log("Post Data:", result);
       router.push("/");
     } catch (error) {

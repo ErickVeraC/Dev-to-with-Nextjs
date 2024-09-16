@@ -14,7 +14,6 @@ export default function Home({ posts }) {
 
   return (
     <MainLayout onSearch={handleSearch}>
-      {" "}
       <main className="grid grid-cols-12 gap-4">
         <aside className="col-span-3 hidden md:block">
           <MainAside />

@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getPostById, getPosts } from "@/utils/api";
@@ -26,16 +25,16 @@ export default function PostPage({ post }) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const posts = await getPosts();
   const paths = posts.map((post) => ({
     params: { id: post._id },
   }));
 
   return { paths, fallback: true };
-};
+}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }) {
   try {
     console.log(`Fetching post with id: ${params.id}`);
     const post = await getPostById(params.id);
@@ -60,4 +59,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     };
   }
-};
+}

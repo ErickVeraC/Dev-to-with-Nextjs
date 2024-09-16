@@ -30,7 +30,7 @@ export default function MainAside() {
         </p>
         <p className="text-xs text-gray-500 p-2">
           Made with love and{" "}
-          <span className="text-[#5d67e3]">Ruby on Rails.</span> DEV Community ©
+          <span className="text-[#5d67e3]">Ruby on Rails.</span> DEV Community
           2016 - 2024.
         </p>
       </div>

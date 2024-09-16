@@ -19,7 +19,11 @@ export function useFetchTags(fetchTags: () => Promise<Tag[]>) {
         const data = await fetchTags();
         setTags(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError(String(error));
+        }
       } finally {
         setLoading(false);
       }

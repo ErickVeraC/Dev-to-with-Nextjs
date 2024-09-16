@@ -15,6 +15,6 @@ export const createAccountSchema = yup.object({
     .matches(/[0-9]/, "Password must contain at least one number"),
   passwordConfirmation: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .oneOf([yup.ref("password"), undefined], "Passwords must match")
     .required("Password confirmation is required"),
 });

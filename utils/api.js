@@ -1,18 +1,6 @@
 const API_URL = "https://desafio-backend-jnku.onrender.com";
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
-
-interface Tag {
-  name: string;
-  count: number;
-  createdAt: string;
-}
-
-export async function getPosts(): Promise<Post[]> {
+export async function getPosts() {
   const response = await fetch(`${API_URL}/post`);
   if (!response.ok) {
     throw new Error(`Error fetching posts: ${response.statusText}`);
@@ -25,12 +13,12 @@ export async function getPosts(): Promise<Post[]> {
   }
 }
 
-export async function getPopularTags(): Promise<Tag[]> {
+export async function getPopularTags() {
   const posts = await getPosts();
   if (!Array.isArray(posts)) {
     throw new Error("Expected posts to be an array");
   }
-  const tagCount: { [key: string]: number } = {};
+  const tagCount = {};
 
   posts.forEach((post) => {
     post.tags.forEach((tag) => {
@@ -50,12 +38,12 @@ export async function getPopularTags(): Promise<Tag[]> {
   return tags;
 }
 
-export async function getRecentTags(): Promise<Tag[]> {
+export async function getRecentTags() {
   const posts = await getPosts();
   if (!Array.isArray(posts)) {
     throw new Error("Expected posts to be an array");
   }
-  const tagSet = new Set<string>();
+  const tagSet = new Set();
 
   posts.forEach((post) => {
     post.tags.forEach((tag) => {
@@ -72,7 +60,7 @@ export async function getRecentTags(): Promise<Tag[]> {
   return tags.slice(0, 5);
 }
 
-export async function login(email: string, password: string) {
+export async function login(email, password) {
   console.log("Sending login request with:", { email, password });
 
   const response = await fetch(`${API_URL}/auth/login`, {
@@ -101,7 +89,7 @@ export async function login(email: string, password: string) {
   }
 }
 
-export async function getUserData(userId: string) {
+export async function getUserData(userId) {
   const response = await fetch(`${API_URL}/user/${userId}`);
   if (!response.ok) {
     throw new Error(`Error fetching user data: ${response.statusText}`);
@@ -111,12 +99,7 @@ export async function getUserData(userId: string) {
   return result.data.user;
 }
 
-export async function createUser(
-  email: string,
-  password: string,
-  name: string,
-  profilePic: string
-) {
+export async function createUser(email, password, name, profilePic) {
   const response = await fetch(`${API_URL}/user`, {
     method: "POST",
     headers: {
@@ -134,7 +117,7 @@ export async function createUser(
   return data;
 }
 
-export async function getPostById(id: string) {
+export async function getPostById(id) {
   try {
     console.log(`Fetching post with id: ${id}`);
     const response = await fetch(`${API_URL}/post/${id}`);
@@ -156,24 +139,7 @@ export async function getPostById(id: string) {
   }
 }
 
-interface PostData {
-  title: string;
-  content: string;
-  tags?: string[];
-  image?: string;
-  user: string;
-}
-
-interface CreatePostResponse {
-  success: boolean;
-  data: PostData;
-  message?: string;
-}
-
-export async function createPost(
-  postData: PostData,
-  token: string
-): Promise<CreatePostResponse> {
+export async function createPost(postData, token) {
   try {
     const response = await fetch(`${API_URL}/post`, {
       method: "POST",

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserData } from "../utils/api";
+import { getUserData } from "@/utils/api";
 import Link from "next/link";
 
 export default function PostsCard({ post, showImage }) {
