@@ -7,6 +7,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "sonner";
 
+type FormData = {
+  email: string;
+  password: string;
+  name: string;
+  profilePic: string;
+};
+
 export default function SignUp() {
   const {
     register,
@@ -20,7 +27,7 @@ export default function SignUp() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
       const { email, password, name, profilePic } = data;

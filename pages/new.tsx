@@ -24,7 +24,7 @@ export default function NewPost() {
   const [isInputVisible, setIsInputVisible] = useState(false);
   const router = useRouter();
 
-  const handleTagInput = (event) => {
+  const handleTagInput = (event: KeyboardEvent<HTMLInputElement>) => {
     if (tagsArray.length >= 4) {
       event.preventDefault();
       return;
@@ -45,7 +45,7 @@ export default function NewPost() {
     );
   };
 
-  const handleRemoveTag = (index) => {
+  const handleRemoveTag = (index: number) => {
     const updatedTags = tagsArray.filter((_, i) => i !== index);
     setTagsArray(updatedTags);
     const remainingTags = 4 - updatedTags.length;

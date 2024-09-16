@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import "@/styles/quill.css";
 import "@/utils/fontawesome";
 
 import type { AppProps } from "next/app";
