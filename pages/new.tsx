@@ -5,17 +5,22 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import CreatePostMenu from "@/components/CreatePostMenu";
 
+type FormData = {
+  title: string;
+  content: string;
+  tags: string[];
+};
+
 export default function NewPost() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setValue,
   } = useForm();
   const [tagsArray, setTagsArray] = useState([]);
   const [tagPlaceholder, setTagPlaceholder] = useState("Add up to 4 tags...");
   const [message, setMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState(false);
+
   const [isInputVisible, setIsInputVisible] = useState(false);
   const router = useRouter();
 
@@ -51,7 +56,7 @@ export default function NewPost() {
     );
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: FormData) => {
     console.log("Publishing started...");
     try {
       const result = await createPost(data);
