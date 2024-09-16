@@ -5,17 +5,18 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import CreatePostMenu from "@/components/CreatePostMenu";
 
-export default function Form() {
-  const [tagsArray, setTagsArray] = useState([]);
-  const [successMessage, setSuccessMessage] = useState(false);
-  const [isInputVisible, setIsInputVisible] = useState(false);
+export default function NewPost() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
   } = useForm();
+  const [tagsArray, setTagsArray] = useState([]);
   const [tagPlaceholder, setTagPlaceholder] = useState("Add up to 4 tags...");
+  const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [isInputVisible, setIsInputVisible] = useState(false);
   const router = useRouter();
 
   const handleTagInput = (event) => {
@@ -53,22 +54,8 @@ export default function Form() {
   const onSubmit = async (data) => {
     console.log("Publishing started...");
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-
-      const postData = {
-        ...data,
-        tags: tagsArray.map((tag) => `#${tag}`),
-        timestamp: new Date().toLocaleString(),
-      };
-
-      console.log("Post data:", postData);
-
-      const result = await createPost(postData, token);
+      const result = await createPost(data);
       console.log("Post Data:", result);
-      setSuccessMessage(true);
       router.push("/");
     } catch (error) {
       console.error("Error submitting post:", error);
@@ -80,105 +67,122 @@ export default function Form() {
   return (
     <>
       <CreatePostMenu />
-      <section className="container w-3/5 ml-10 py-10">
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <div className="w-1/3 p-2 rounded-md transition-all duration-100 ease-in-out hover:border-2 hover:border-[#3b49df]">
-              {isInputVisible ? (
-                <input
-                  type="url"
-                  className="p-2 rounded-md border border-gray-500/8 font-medium w-full justify-start text-sm"
-                  placeholder="Enter image URL"
-                  {...register("image", { required: true })}
-                />
-              ) : (
-                <button
-                  type="button"
-                  className=""
-                  onClick={() => setIsInputVisible(true)}
-                >
-                  Add a cover image
-                </button>
-              )}
-              {errors.image && (
-                <p className="text-red-500">Image URL is required</p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                className="p-4 font-bold text-5xl border-none focus:outline-none placeholder:font-bold placeholder:text-5xl placeholder:text-[#525252]"
-                placeholder="New post title here..."
-                {...register("title", { required: true })}
-              />
-              {errors.title && (
-                <p className="text-red-500">Title is required</p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                className="w-full mt-2 p-3 text-lg rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
-                placeholder={tagPlaceholder}
-                onKeyDown={handleTagInput}
-              />
-              <div className="flex flex-wrap space-x-2 mt-2">
-                {tagsArray.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-[#3b49df] text-white text-xs rounded-md px-4 py-2"
+      <div className="container w-full ml-6 py-6 grid grid-cols-12">
+        <section className="col-span-10">
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="bg-white rounded-lg p-6">
+              <div className="w-1/3 p-2 rounded-md transition-all duration-100 ease-in-out hover:border-2 hover:border-[#3b49df]">
+                {isInputVisible ? (
+                  <input
+                    type="url"
+                    className="p-2 rounded-md border border-gray-500/8 font-medium w-full justify-start text-sm"
+                    placeholder="Enter image URL"
+                    {...register("image", { required: true })}
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => setIsInputVisible(true)}
                   >
-                    {tag}
-                    <button
-                      type="button"
-                      className="ml-2 text-white"
-                      onClick={() => handleRemoveTag(index)}
+                    Add a cover image
+                  </button>
+                )}
+                {errors.image && (
+                  <p className="text-red-500">Image URL is required</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <input
+                  type="text"
+                  className="p-4 font-bold text-5xl border-none focus:outline-none placeholder:font-bold placeholder:text-5xl placeholder:text-[#525252]"
+                  placeholder="New post title here..."
+                  {...register("title", { required: true })}
+                  onFocus={() =>
+                    setMessage(
+                      "Writing a Great Post Title\nThink of your post title as a super short (but compelling!) description — like an overview of the actual post in one short sentence.\nUse keywords where appropriate to help ensure people can find your post by search."
+                    )
+                  }
+                  onBlur={() => setMessage("")}
+                />
+                {errors.title && (
+                  <p className="text-red-500">Title is required</p>
+                )}
+              </div>
+
+              <div className="mb-4">
+                <input
+                  type="text"
+                  className="w-full mt-2 p-3 text-lg rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
+                  placeholder={tagPlaceholder}
+                  onKeyDown={handleTagInput}
+                  onFocus={() =>
+                    setMessage(
+                      "Tagging Guidelines\nTags help people find your post - think of them as the topics or categories that best describe your post.\nAdd up to four comma-separated tags per post. Use existing tags whenever possible.\nSome tags have special posting guidelines - double check to make sure your post complies with them."
+                    )
+                  }
+                  onBlur={() => setMessage("")}
+                />
+                <div className="flex flex-wrap space-x-2 mt-2">
+                  {tagsArray.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="bg-[#3b49df] text-white text-xs rounded-md px-4 py-2"
                     >
-                      &times;
-                    </button>
-                  </span>
-                ))}
+                      {tag}
+                      <button
+                        type="button"
+                        className="ml-2 text-white"
+                        onClick={() => handleRemoveTag(index)}
+                      >
+                        &times;
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <textarea
+                  className="w-full p-3 text-lg rounded-md focus:outline-none focus:ring focus:ring-indigo-500 h-96"
+                  placeholder="Write your post content here..."
+                  {...register("body", { required: true })}
+                  onFocus={() =>
+                    setMessage(
+                      "Editor Basics\nUse Markdown to write and format posts.\nCommonly used syntax\nEmbed rich content such as Tweets, YouTube videos, etc. Use the complete URL: {% embed https://... %}. See a list of supported embeds.\nIn addition to images for the post's content, you can also drag and drop a cover image."
+                    )
+                  }
+                  onBlur={() => setMessage("")}
+                />
+                {errors.body && (
+                  <p className="text-red-500">Content is required</p>
+                )}
               </div>
             </div>
-
-            <div className="mb-4">
-              <textarea
-                className="w-full p-3 text-lg rounded-md focus:outline-none focus:ring focus:ring-indigo-500 h-96"
-                placeholder="Write your post content here..."
-                {...register("body", { required: true })}
-              />
-              {errors.body && (
-                <p className="text-red-500">Content is required</p>
+            <button
+              type="submit"
+              className={clsx(
+                "text-sm py-2 px-8 rounded-md transition ease duration-300",
+                {
+                  "bg-[#3b49df] text-white hover:bg-[#313cba]": !isSubmitting,
+                  "bg-gray-400 text-gray-700 cursor-not-allowed": isSubmitting,
+                }
               )}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className={clsx(
-              "text-sm py-2 px-8 rounded-md transition ease duration-300",
-              {
-                "bg-[#3b49df] text-white hover:bg-[#313cba]": !isSubmitting,
-                "bg-gray-400 text-gray-700 cursor-not-allowed": isSubmitting,
-              }
-            )}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Publishing..." : "Publish"}
-          </button>
-
-          {successMessage && (
-            <div
-              id="success-message"
-              className="text-green-500 text-center mt-4"
+              disabled={isSubmitting}
             >
-              Post published successfully!
+              {isSubmitting ? "Publishing..." : "Publish"}
+            </button>
+          </form>
+        </section>
+        <aside className="col-span-2 p-2">
+          {message && (
+            <div className="text-gray-500">
+              <p>{message}</p>
             </div>
           )}
-        </form>
-      </section>
+        </aside>
+      </div>
     </>
   );
 }
