@@ -12,15 +12,20 @@ export function useFetchTags(fetchTags: () => Promise<Tag[]>) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchTags()
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await fetchTags();
         setTags(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [fetchTags]);
 
   return { tags, loading, error };

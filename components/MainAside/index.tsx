@@ -17,16 +17,21 @@ export default function MainAside() {
       <NavList />
       <SocialLinks />
       <div>
-        <p className="text-xs">
-          DEV Community A constructive and inclusive social network for software
-          developers. With you every step of your journey.
+        <p className="text-xs text-gray-500 p-2">
+          <span className="text-[#5d67e3]">DEV Community</span> A constructive
+          and inclusive social network for software developers. With you every
+          step of your journey.
         </p>
-        <p className="text-xs">
-          Built on Forem — the open source software that powers DEV and other
-          inclusive communities.
+        <p className="text-xs text-gray-500 p-2">
+          Built on <span className="text-[#5d67e3]">Forem</span> — the{" "}
+          <span className="text-[#5d67e3]">open source</span> software that
+          powers <span className="text-[#5d67e3]">DEV</span> and other inclusive
+          communities.
         </p>
-        <p className="text-xs">
-          Made with love and Ruby on Rails. DEV Community © 2016 - 2024.
+        <p className="text-xs text-gray-500 p-2">
+          Made with love and{" "}
+          <span className="text-[#5d67e3]">Ruby on Rails.</span> DEV Community ©
+          2016 - 2024.
         </p>
       </div>
     </aside>

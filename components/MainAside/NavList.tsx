@@ -2,114 +2,114 @@ const NavList: React.FC = ({ items }) => {
   return (
     <section name="list-bar">
       <ul className="flex flex-col mb-3">
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
-            <span className="p-2 text-xs ">&#127968;</span>
-            Home
+            <span className="p-2 text-xs">&#127968;</span>
+            <span className="hover:underline">Home</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128229;</span>
-            Reading List
+            <span className="hover:underline">Reading List</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#127897;</span>
-            Podcast
+            <span className="hover:underline">Podcast</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#127909;</span>
-            Videos
+            <span className="hover:underline">Videos</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
-          <button href="#" className="flex items-center p-2 gap-2">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
+          <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#127991;</span>
-            Tags
+            <span className="hover:underline">Tags</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
-          <button href="#" className="flex items-center p-2 gap-2">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
+          <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128161;</span>
-            DEV Help
+            <span className="hover:underline">DEV Help</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
-          <button href="#" className="flex items-center p-2 gap-2">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
+          <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128717;</span>
-            Forem Shop
+            <span className="hover:underline">Forem Shop</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#10084;</span>
-            Advertise on DEV
+            <span className="hover:underline">Advertise on DEV</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#127942;</span>
-            DEV Challenges
+            <span className="hover:underline">DEV Challenges</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#10024;</span>
-            DEV Showcase
+            <span className="hover:underline">DEV Showcase</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">
               <img
                 src="/dev-icon.png"
                 id="icondev"
                 alt="Icono de DEV"
-                width="30px"
+                width="24px"
               />
             </span>
-            About
+            <span className="hover:underline">About</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128239;</span>
-            Contact
+            <span className="hover:underline">Contact</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128214;</span>
-            Guides
+            <span className="hover:underline">Guides</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#129300;</span>
-            Software comparisons
+            <span className="hover:underline">Software comparisons</span>
           </button>
         </li>
-        <p>Other</p>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <p className="p-2 font-bold">Other</p>
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128077;</span>
-            Code of Conduct
+            <span className="hover:underline">Code of Conduct</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#129299;</span>
-            Privacy Policy
+            <span className="hover:underline">Privacy Policy</span>
           </button>
         </li>
-        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md hover:underline">
-          <button href="#" className="flex items-center px-2 gap-2 ">
+        <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
+          <button href="#" className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">&#128064;</span>
-            Terms of use
+            <span className="hover:underline">Terms of use</span>
           </button>
         </li>
       </ul>

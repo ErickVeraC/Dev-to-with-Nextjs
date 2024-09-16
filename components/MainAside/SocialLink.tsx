@@ -9,7 +9,7 @@ export function SocialLink({ href, title, svgPath }: SocialLinkProps) {
     <a
       href={href}
       target="_blank"
-      className="c-link c-link--icon-alone c-link--block"
+      className="p-2 hover:bg-[#636bd5] hover:rounded-md"
       rel="noopener noreferrer"
     >
       <svg

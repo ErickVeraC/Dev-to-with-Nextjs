@@ -35,26 +35,26 @@ function NavBar({ onSearch }) {
   }, []);
 
   return (
-    <nav className="w-full grid grid-cols-12 gap-4 p-2 bg-white">
-      <div className="col-span-1 flex items-center md:hidden">
+    <nav className="w-full flex items-center p-2 bg-white">
+      <div className="flex items-center md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="p-2 focus:outline-none"
         >
-          &#9776; {/* Icono de menú */}
+          &#9776;
         </button>
       </div>
-      <div className="col-span-1 w-24 md:w-auto">
+      <div className="flex items-center w-24 md:w-auto">
         <Logo />
       </div>
-      <div className="col-span-8 md:col-span-7 lg:col-span-8 hidden md:block">
+      <div className="flex-grow hidden md:block px-2">
         <SearchBar onSearch={onSearch} />
       </div>
-      <div className="col-span-3">
+      <div className="flex items-center ml-auto px-2">
         {token ? <UserMenu userData={userData} /> : <AuthButtons />}
       </div>
       {isMenuOpen && (
-        <div className="col-span-12 md:hidden">
+        <div className="w-full md:hidden">
           <NavList />
         </div>
       )}
