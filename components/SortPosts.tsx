@@ -11,7 +11,7 @@ export default function SortPosts({ posts }) {
   }, [posts]);
 
   const sortPosts = (order) => {
-    let sortedArray = [...posts];
+    const sortedArray = [...posts];
     if (order === "recent") {
       sortedArray.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
