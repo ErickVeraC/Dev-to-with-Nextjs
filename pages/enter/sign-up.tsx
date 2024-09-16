@@ -5,7 +5,6 @@ import clsx from "clsx";
 import { createUser } from "@/utils/api";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { toast } from "sonner";
 
 type FormData = {
   email: string;
@@ -33,14 +32,10 @@ export default function SignUp() {
       const { email, password, name, profilePic } = data;
 
       await createUser(email, password, name, profilePic);
-      toast.success(
-        "The new user was created successfully, now you need to log in"
-      );
 
       reset();
       router.push("/");
     } catch (error) {
-      toast.error(error.message || "Failed to create user");
       console.error("Error creating user:", error);
     } finally {
       setIsSubmitting(false);

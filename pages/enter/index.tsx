@@ -3,7 +3,12 @@ import { socialSessionButtons } from "@/components/Icons";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { login } from "@/utils/api";
-import { toast } from "sonner";
+import Image from "next/image";
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 export default function Enter() {
   const {
@@ -15,7 +20,7 @@ export default function Enter() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function onSubmit(data) {
+  async function onSubmit(data: FormData) {
     console.log("Form submitted with data:", data);
     try {
       setIsSubmitting(true);
@@ -31,14 +36,12 @@ export default function Enter() {
 
       console.log("Received token and userId:", token, userId);
 
-      toast.error("Invalid data");
       setError("root.data", {
         type: "manual",
         message: "Invalid username or password",
       });
       setIsSubmitting(false);
     } catch (error) {
-      toast.error("Invalid data");
       console.error("Error: ", error);
       setIsSubmitting(false);
     }
@@ -48,7 +51,13 @@ export default function Enter() {
     <main className="bg-white w-full max-h-full mx-auto max-w-3xl">
       <div className="w-3/4 flex flex-col gap-2 mx-auto">
         <section className="flex flex-col gap-4 items-center text-center">
-          <img className="h-16" src="/dev-icon.png" alt="" />
+          <Image
+            className="h-16"
+            src="/dev-icon.png"
+            alt="Dev Icon"
+            width={80}
+            height={64}
+          />{" "}
           <h1 className="text-3xl font-bold">Join the DEV Community</h1>
           <p className="text-gray-600">
             DEV Community is a community of 2,015,351 amazing developers
@@ -91,7 +100,7 @@ export default function Enter() {
               })}
             />
             {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+              <p className="text-red-500">{errors.email?.message || ""}</p>
             )}
             <label htmlFor="password" className="font-bold">
               Password
@@ -107,7 +116,7 @@ export default function Enter() {
               })}
             />
             {errors.password && (
-              <p className="text-red-500">{errors.password.message}</p>
+              <p className="text-red-500">{errors.password?.message || ""}</p>
             )}
             <div className="flex flex-row justify-between text-sm py-4">
               <div className="flex flex-row gap-2">

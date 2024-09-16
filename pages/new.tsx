@@ -17,14 +17,14 @@ export default function NewPost() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-  const [tagsArray, setTagsArray] = useState([]);
+  const [tagsArray, setTagsArray] = useState<string[]>([]);
   const [tagPlaceholder, setTagPlaceholder] = useState("Add up to 4 tags...");
   const [message, setMessage] = useState("");
 
   const [isInputVisible, setIsInputVisible] = useState(false);
   const router = useRouter();
 
-  const handleTagInput = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleTagInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (tagsArray.length >= 4) {
       event.preventDefault();
       return;
@@ -56,10 +56,10 @@ export default function NewPost() {
     );
   };
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Publishing started...");
     try {
-      const result = await createPost(data);
+      const result = await createPost(data, token);
       console.log("Post Data:", result);
       router.push("/");
     } catch (error) {
