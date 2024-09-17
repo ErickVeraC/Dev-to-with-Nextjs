@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const NavList: React.FC = () => {
   return (
     <section>
@@ -65,12 +67,7 @@ const NavList: React.FC = () => {
         <li className="cursor-pointer hover:bg-[#e6e7f4] hover:text-[#3e4adf] hover:rounded-md">
           <button className="flex items-center px-2 gap-2">
             <span className="p-2 text-xs">
-              <img
-                src="/dev-icon.png"
-                id="icondev"
-                alt="Icono de DEV"
-                width="24px"
-              />
+              <Image src="/dev-icon.png" alt="Logo" width={20} height={16} />
             </span>
             <span className="hover:underline">About</span>
           </button>

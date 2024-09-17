@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { getPostById, getPosts } from "@/utils/api";
 import MainLayout from "@/layouts/MainLayout";
 import PostDetail from "@/components/PostDetail";
+import PrintAllPosts from "@/components/PrintAllPosts";
+import { getPosts, getPostById } from "@/utils/api"; // Asegúrate de importar getPostById
 
 export default function PostPage({ post }) {
   const router = useRouter();
@@ -21,6 +22,9 @@ export default function PostPage({ post }) {
       <article className="p-4">
         <PostDetail post={post} />
       </article>
+      <section className="p-4 w-1/2">
+        <PrintAllPosts searchQuery={searchQuery} />
+      </section>
     </MainLayout>
   );
 }

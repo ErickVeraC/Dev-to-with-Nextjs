@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Logo() {
   return (
     <div className="logo">
       <Link href="/">
-        <img src="/dev-icon.png" alt="Logo" className="h-10" />
+        <Image src="/dev-icon.png" width={46} height={50} alt="Dev Icon" />
       </Link>
     </div>
   );

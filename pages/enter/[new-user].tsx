@@ -1,11 +1,12 @@
 import { socialSessionButtons } from "@/components/Icons";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NewUser() {
   return (
     <div className="w-3/4 p-4 mx-auto">
       <section className="flex flex-col gap-4 items-center text-center">
-        <img className="h-16" src="/dev-icon.png" alt="" />
+        <Image src="/dev-icon.png" alt="description" width={120} height={100} />
         <h1 className="text-3xl font-bold">Join the DEV Community</h1>
         <p className="text-gray-600">
           DEV Community is a community of 2,015,351 amazing developers

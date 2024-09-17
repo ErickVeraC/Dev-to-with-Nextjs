@@ -8,7 +8,7 @@ function DevCommunity() {
           DEV Community is a community of 1,513,398 amazing developers
         </h5>
         <p className="text-base">
-          We're a place where coders share, stay up-to-date and grow their
+          We&apos;re a place where coders share, stay up-to-date and grow their
           careers.
         </p>
         <div className="auth-buttons flex flex-col gap-2 text-center p-2">
