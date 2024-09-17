@@ -31,26 +31,26 @@ export default function SortPosts({ posts }) {
         <button
           onClick={() => sortPosts("recent")}
           className={clsx(
-            "bg-transparent text-gray-500 p-2 rounded transition-all duration-300 ease",
+            "font-bold text-black px-4 py-2 rounded-md transition-all duration-300 ease",
             {
-              "hover:bg-gray-500 hover:text-white": sortOrder !== "recent",
-              "bg-gray-500 text-white": sortOrder === "recent",
+              "hover:bg-white hover:text-[#3b49df]": sortOrder !== "recent",
+              "text-[#3b49df]": sortOrder === "recent",
             }
           )}
         >
-          Most Recent
+          Latest
         </button>
         <button
           onClick={() => sortPosts("oldest")}
           className={clsx(
-            "bg-transparent text-gray-500 p-2 rounded transition-all duration-300 ease",
+            "text-gray-500 px-4 py-2 rounded-md transition-all duration-300 ease",
             {
-              "hover:bg-gray-500 hover:text-white": sortOrder !== "oldest",
-              "bg-gray-500 text-white": sortOrder === "oldest",
+              "hover:bg-white hover:text-[#3b49df]": sortOrder !== "oldest",
+              "text-[#3b49df]": sortOrder === "oldest",
             }
           )}
         >
-          Oldest
+          Relevant
         </button>
       </div>
       <section>

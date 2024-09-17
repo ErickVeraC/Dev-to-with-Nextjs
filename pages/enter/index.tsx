@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { login } from "@/utils/api";
 import Image from "next/image";
+import Link from "next/link";
 
 interface FormData {
   email: string;
@@ -48,16 +49,18 @@ export default function Enter() {
   };
 
   return (
-    <main className="bg-white w-full max-h-full mx-auto max-w-3xl">
+    <main className="bg-white w-full max-h-full mx-auto max-w-3xl pt-10">
       <div className="w-3/4 flex flex-col gap-2 mx-auto">
         <section className="flex flex-col gap-4 items-center text-center">
-          <Image
-            className="h-16"
-            src="/dev-icon.png"
-            alt="Dev Icon"
-            width={80}
-            height={64}
-          />{" "}
+          <Link href={"/"}>
+            <Image
+              className="h-16"
+              src="/dev-icon.png"
+              alt="Dev Icon"
+              width={80}
+              height={64}
+            />{" "}
+          </Link>
           <h1 className="text-3xl font-bold">Join the DEV Community</h1>
           <p className="text-gray-600">
             DEV Community is a community of 2,015,351 amazing developers
@@ -143,6 +146,14 @@ export default function Enter() {
               <span className="text-[#3b49df]">privacy policy</span>,{" "}
               <span className="text-[#3b49df]">terms of use</span> and{" "}
               <span className="text-[#3b49df]">code of conduct</span>.
+            </p>
+          </div>
+          <div className="border-t border-gray-400 text-center py-4">
+            <p className="text-sm">
+              New to DEV Community?{" "}
+              <Link href={"/enter/new-user"} className="text-sm text-[#3b49df]">
+                Create account
+              </Link>
             </p>
           </div>
         </section>

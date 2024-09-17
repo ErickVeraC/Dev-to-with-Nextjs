@@ -39,7 +39,7 @@ function NavBar({ onSearch }: NavBarProps) {
   }, []);
 
   return (
-    <nav className="w-full flex items-center p-2 bg-white">
+    <nav className="w-full flex items-center p-2 bg-white border-b border-[#e4e4e4]">
       <div className="flex items-center md:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -46,7 +46,7 @@ export default function SignUp() {
     <main className="flex items-center justify-center min-h-screen bg-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-3/5 flex flex-col justify-center p-2 border border-[#f5f5f5] rounded-md"
+        className="w-3/5 flex flex-col justify-center p-8 border border-[#f5f5f5] rounded-md"
       >
         <h1 className="pt-4 pb-10 font-bold">Create your account</h1>
         <div className="flex flex-col mb-4">
