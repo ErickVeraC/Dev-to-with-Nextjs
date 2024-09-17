@@ -39,30 +39,32 @@ function NavBar({ onSearch }: NavBarProps) {
   }, []);
 
   return (
-    <nav className="w-full flex items-center p-2 bg-white border-b border-[#e4e4e4]">
-      <div className="flex items-center md:hidden">
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 focus:outline-none"
-        >
-          &#9776;
-        </button>
-      </div>
-      <div className="flex items-center w-24 md:w-auto">
-        <Logo />
-      </div>
-      <div className="flex-grow hidden md:block px-2">
-        <SearchBar onSearch={onSearch} />
-      </div>
-      <div className="flex items-center ml-auto px-2">
-        {token ? <UserMenu userData={userData} /> : <AuthButtons />}
-      </div>
+    <>
+      <nav className="w-full flex items-center p-2 bg-white border-b border-[#e4e4e4]">
+        <div className="flex items-center md:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 focus:outline-none"
+          >
+            &#9776;
+          </button>
+        </div>
+        <div className="flex items-center w-24 md:w-auto">
+          <Logo />
+        </div>
+        <div className="flex-grow hidden md:block px-2">
+          <SearchBar onSearch={onSearch} />
+        </div>
+        <div className="flex items-center ml-auto px-2">
+          {token ? <UserMenu userData={userData} /> : <AuthButtons />}
+        </div>
+      </nav>
       {isMenuOpen && (
         <div className="w-full md:hidden">
           <NavList />
         </div>
       )}
-    </nav>
+    </>
   );
 }
 
