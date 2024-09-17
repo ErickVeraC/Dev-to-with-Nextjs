@@ -2,6 +2,9 @@
 
 ![Dev-to-with-Nextjs Banner](./public/dev-icon.png)
 
+You can find the project on https://dev-to-with-nextjs-dcqh.vercel.app/
+And the backend on https://desafio-backend-jnku.onrender.com
+
 ## Table of Contents
 
 - [Introduction](#introduction)
